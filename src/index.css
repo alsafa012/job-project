@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+     font-family: "Cormorant Garamond", serif;
+     box-sizing: border-box;
+     /* color: #858792; */
+     color: #ffffff;
+     /* 858792 text color */
+}
+.dark-bg {
+     background-color: #252734;
+}
+.light-bg {
+     background-color: #2a2c39;
+}
+/* #858792 */
+.primary-btn {
+     background-color: #252734;
+     transition: background-color 2s ease, border-color 2s ease-out;
+     border-radius: 3rem;
+     border: 2px solid #2a2c39;
+     color: aliceblue;
+}
+
+.primary-btn:hover {
+     background-color: #2a2c39;
+     border-color: transparent;
+     /* border-radius: 500px; */
+}
+.box {
+     border: 1px solid rgba(255, 255, 255, 0.1);
+     border-radius: 50%;
+}
+.my-border {
+     border: 1px solid rgba(255, 255, 255, 0.1);
+     /* color: rgba(255,255,255,.1); */
+}
+/* border: 1px solid rgba(255,255,255,.1); all border color */
+/* // <div className="dark:bg-[#A2A2A2]">
+// <div className="dark:bg-[#878592]">2a2c39 */
