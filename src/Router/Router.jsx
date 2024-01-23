@@ -9,6 +9,7 @@ import AddHousePage from "../Dashboard/OwnerDashboard/AddHousePage/AddHousePage"
 import OwnerManageBookings from "../Dashboard/OwnerDashboard/OwnerManageBookings/OwnerManageBookings";
 import OwnerHouseList from "../Dashboard/OwnerDashboard/OwnerHouseList/OwnerHouseList";
 import AllHousePage from "../Pages/AllHousePage/AllHousePage";
+import HomeDetailsPage from "../Pages/HouseDetailsPage/HouseDetailsPage";
 
 const myCreatedRouter = createBrowserRouter([
      {
@@ -26,7 +27,8 @@ const myCreatedRouter = createBrowserRouter([
                },
                {
                     path:"/details/:id",
-                    element:<AllHousePage></AllHousePage>
+                    element:<HomeDetailsPage></HomeDetailsPage>,
+                    loader:({params})=>fetch(`http://localhost:5000/ownerCollections/${params.id}`)
                },
                {
                     path:"/login",

@@ -3,13 +3,15 @@ import useAllHousesDetails from "../../Components/hook/useAllHousesDetails";
 import ShowAllHousePage from "./ShowAllHousePage";
 import { GiClick } from "react-icons/gi";
 import Container from "../../Shared/Container/Container";
-import Navbar from "../../Shared/Navbar/Navbar";
+// import Navbar from "../../Shared/Navbar/Navbar";
+import WebsiteTitle from "../../Shared/WebsiteTitle/WebsiteTitle";
 const AllHousePage = () => {
      const [allHouseList] = useAllHousesDetails();
      console.log("allHouseList", allHouseList);
      return (
           <div className="light-bg">
-               <Navbar></Navbar>
+               <WebsiteTitle title={"Our House"}></WebsiteTitle>
+               {/* <Navbar></Navbar> */}
                <Container>
                     <div className="pt-16">
                          {allHouseList.length === 0 ? (
