@@ -8,6 +8,7 @@ import Dashboard from "../Layout/Dashboard";
 import AddHousePage from "../Dashboard/OwnerDashboard/AddHousePage/AddHousePage";
 import OwnerManageBookings from "../Dashboard/OwnerDashboard/OwnerManageBookings/OwnerManageBookings";
 import OwnerHouseList from "../Dashboard/OwnerDashboard/OwnerHouseList/OwnerHouseList";
+import AllHousePage from "../Pages/AllHousePage/AllHousePage";
 
 const myCreatedRouter = createBrowserRouter([
      {
@@ -18,6 +19,14 @@ const myCreatedRouter = createBrowserRouter([
                {
                     path:"/",
                     element:<HomePage></HomePage>
+               },
+               {
+                    path:"/allHomePages",
+                    element:<AllHousePage></AllHousePage>
+               },
+               {
+                    path:"/details/:id",
+                    element:<AllHousePage></AllHousePage>
                },
                {
                     path:"/login",

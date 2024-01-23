@@ -5,6 +5,7 @@ import Container from "../../../Shared/Container/Container";
 import useAxiosPublic from "../../../Components/hook/useAxiosPublic";
 import SectionTitle from "../../../Shared/SectionTitle/SectionTitle";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
@@ -12,6 +13,10 @@ const AddHousePage = () => {
      const { register, handleSubmit, reset } = useForm();
      const axiosPublic = useAxiosPublic();
      const navigate = useNavigate();
+     const userInfoFromLocalStorage = JSON.parse(
+          localStorage.getItem("user")
+     );
+     // console.log(userInfoFromLocalStorage.email)
      const onSubmit = async (data) => {
           console.log(data);
           //image upload to imgbb and then get an url
@@ -19,9 +24,15 @@ const AddHousePage = () => {
           const res = await axiosPublic.post(image_hosting_api, imageFile, {
                headers: { "Content-Type": "multipart/form-data" },
           });
+          // const userInfoFromLocalStorage = JSON.parse(
+          //      localStorage.getItem("user")
+          // );
+          // console.log(userInfoFromLocalStorage);
+          
           if (res.data.success) {
                // send the menuitem data to the data with the image url
                const addHouseDetails = {
+                    email: userInfoFromLocalStorage.email,
                     name: data.name,
                     address: data.address,
                     city: data.city,
@@ -47,7 +58,7 @@ const AddHousePage = () => {
                     navigate('/dashboard/ownerHouseList')
                     Swal.fire({
                          title: "Good job!",
-                         text: `${data.name} contest added Successfully`,
+                         text: `${data.name} House added Successfully`,
                          icon: "success",
                     });
                }

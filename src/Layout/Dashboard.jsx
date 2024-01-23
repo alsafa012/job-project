@@ -25,7 +25,7 @@ const Dashboard = () => {
                confirmButtonText: "Yes",
           }).then((result) => {
                if (result.isConfirmed) {
-                    console.log("sdk sign");
+                    // console.log("sdk sign");
                     navigate("/");
                }
           });

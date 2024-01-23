@@ -16,6 +16,7 @@ const Navbar = () => {
      console.log(users);
 
      useEffect(() => {
+          
           const userInfoFromLocalStorage = JSON.parse(
                localStorage.getItem("user")
           );
@@ -66,7 +67,7 @@ const Navbar = () => {
                     </NavLink>
                </li>
                <li>
-                    <NavLink to="/allContest">Our Contests</NavLink>
+                    <NavLink to="/allHomePages">Our Home</NavLink>
                </li>
                <li>
                     <NavLink to="/contacts">Contact Us</NavLink>

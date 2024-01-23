@@ -1,7 +1,6 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
-const ShowOwnerHouseList = ({ houseDetails }) => {
+const ShowAllHousePage = ({ house }) => {
      const {
           _id,
           name,
@@ -15,13 +14,13 @@ const ShowOwnerHouseList = ({ houseDetails }) => {
           availability,
           description,
           image,
-     } = houseDetails;
+     } = house;
      return (
           <div>
-               <div className="dark-bg shadow-xl rounded-lg">
+               <div className="dark-bg rounded-lg">
                     {/* <figure> */}
                     <img
-                         className="w-full h-[200px] flex justify-center mb-3 rounded-t-lg"
+                         className="w-full h-[200px] flex justify-center mb-3 rounded-t-lg hover:scale-5 transition"
                          src={image}
                          alt="Shoes"
                     />
@@ -53,4 +52,4 @@ const ShowOwnerHouseList = ({ houseDetails }) => {
      );
 };
 
-export default ShowOwnerHouseList;
+export default ShowAllHousePage;
