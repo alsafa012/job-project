@@ -6,6 +6,8 @@ import LoginPage from "../Pages/LoginPage/LoginPage";
 import RegistrationPage from "../Pages/RegistrationPage/RegistrationPage";
 import Dashboard from "../Layout/Dashboard";
 import AddHousePage from "../Dashboard/OwnerDashboard/AddHousePage/AddHousePage";
+import OwnerManageBookings from "../Dashboard/OwnerDashboard/OwnerManageBookings/OwnerManageBookings";
+import OwnerHouseList from "../Dashboard/OwnerDashboard/OwnerHouseList/OwnerHouseList";
 
 const myCreatedRouter = createBrowserRouter([
      {
@@ -34,6 +36,14 @@ const myCreatedRouter = createBrowserRouter([
                {
                     path:"/dashboard/addHouse",
                     element:<AddHousePage></AddHousePage>
+               },
+               {
+                    path:"/dashboard/ownerManageBookings",
+                    element:<OwnerManageBookings></OwnerManageBookings>
+               },
+               {
+                    path:"/dashboard/ownerHouseList",
+                    element:<OwnerHouseList></OwnerHouseList>
                },
           ]
      }

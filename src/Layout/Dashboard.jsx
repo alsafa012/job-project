@@ -1,24 +1,19 @@
-import { FaHome, FaSearch } from "react-icons/fa";
+import { FaHome } from "react-icons/fa";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-// import useAdmin from "../Components/hook/useAdmin";
-// import useCreator from "../Components/hook/useCreator";
 import { IoClose } from "react-icons/io5";
 import { FaListUl } from "react-icons/fa";
 import { useState } from "react";
 import { CgLogOut } from "react-icons/cg";
-// import useAuth from "../Components/hook/useAuth";
 import Swal from "sweetalert2";
-// {/* <FaListUl /> */}
+import useUser from "../Components/hook/useUser";
 const Dashboard = () => {
-     // const [isAdmin] = useAdmin();
-     // const [isCreator] = useCreator();
      const isAdmin = true;
      const isCreator = false;
-     // const { user, userSignOut } = useAuth();
      const navigate = useNavigate();
      const [toggle, setToggle] = useState(false);
+     const [users] = useUser();
+     console.log(users);
      const user = true;
-
      const handleUserSignOut = () => {
           Swal.fire({
                title: "Are you sure?",
@@ -30,16 +25,8 @@ const Dashboard = () => {
                confirmButtonText: "Yes",
           }).then((result) => {
                if (result.isConfirmed) {
-                    userSignOut()
-                         .then(() => {
-                              Swal.fire(
-                                   "Good job!",
-                                   "User Sign out successfully",
-                                   "success"
-                              );
-                              navigate("/");
-                         })
-                         .catch();
+                    console.log("sdk sign");
+                    navigate("/");
                }
           });
      };
@@ -77,41 +64,47 @@ const Dashboard = () => {
                               ></label>
                               <ul className="menu p-4 w-80 min-h-full bg-base-200  dark-bg text-white relative">
                                    {/* Sidebar content here */}
-                                   {/* <ul className="menu p-4 space-y-2"> */}
-
                                    {user && (
                                         <>
                                              <div className="w-full my-3">
                                                   <img
                                                        className="rounded-full h-[100px] w-[100px] object-fill mx-auto"
-                                                       src={user?.photoURL}
+                                                       src={
+                                                            users?.photoURL
+                                                                 ? users.photoURL
+                                                                 : "https://i.ibb.co/cCMpkzh/product-8-300x300.jpg"
+                                                       }
                                                        alt=""
                                                   />
                                                   <p className="font-medium text-center p-2">
-                                                       {(isAdmin && "Admin") ||
-                                                            (isCreator &&
-                                                                 "Creator") ||
-                                                            "User"}
+                                                       {users?.role === "owner"
+                                                            ? "House Owner"
+                                                            : "House Renter"}
                                                   </p>
                                              </div>
                                         </>
                                    )}
 
-                                   {isAdmin && (
+                                   {users.role === "owner" && (
                                         <>
                                              <li>
-                                                  <NavLink to="/dashboard/users">
-                                                       Manage User
+                                                  <NavLink to="/dashboard/addHouse">
+                                                       Add House for rent
                                                   </NavLink>
                                              </li>
                                              <li>
-                                                  <NavLink to="/dashboard/manageContext">
-                                                       Manage Contest
+                                                  <NavLink to="/dashboard/ownerManageBookings">
+                                                       Manage Booking
+                                                  </NavLink>
+                                             </li>
+                                             <li>
+                                                  <NavLink to="/dashboard/ownerHouseList">
+                                                       My list of Houses
                                                   </NavLink>
                                              </li>
                                         </>
                                    )}
-                                   {isCreator && (
+                                   {users.role === "renter" && (
                                         <>
                                              <li>
                                                   <NavLink to="/dashboard/createContext">
@@ -131,34 +124,10 @@ const Dashboard = () => {
                                         </>
                                    )}
                                    {/*  */}
-                                   {!isAdmin && !isCreator && (
-                                        <>
-                                             <li>
-                                                  <NavLink to="/dashboard/userRegister">
-                                                       My Registered Contest
-                                                  </NavLink>
-                                             </li>
-                                             <li>
-                                                  <NavLink to="/dashboard/userWinning">
-                                                       My Winning Contest
-                                                  </NavLink>
-                                             </li>
-                                             <li>
-                                                  <NavLink to="/dashboard/userProfile">
-                                                       My Profile
-                                                  </NavLink>
-                                             </li>
-                                        </>
-                                   )}
                                    <div className="divider divider-accent"></div>
                                    <li>
                                         <NavLink to="/">
                                              <FaHome></FaHome>Home
-                                        </NavLink>
-                                   </li>
-                                   <li>
-                                        <NavLink to="/allContest">
-                                             <FaSearch></FaSearch> All Contest
                                         </NavLink>
                                    </li>
                                    {/* <li className="absolute bottom-5"> */}

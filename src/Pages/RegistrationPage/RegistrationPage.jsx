@@ -57,6 +57,7 @@ const RegistrationPage = () => {
                CreatedTime: moment().format("MMMM Do YYYY, h:mm:ss a"),
                role: role,
                contactNumber: phone,
+               photoURL:photo
           };
           const localInfo = { name: name, email: email };
           localStorage.setItem("user", JSON.stringify(localInfo));

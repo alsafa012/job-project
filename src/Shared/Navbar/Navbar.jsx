@@ -16,7 +16,9 @@ const Navbar = () => {
      console.log(users);
 
      useEffect(() => {
-          const userInfoFromLocalStorage = JSON.parse(localStorage.getItem("user"));
+          const userInfoFromLocalStorage = JSON.parse(
+               localStorage.getItem("user")
+          );
           if (userInfoFromLocalStorage) {
                setUserEmail(userInfoFromLocalStorage.email);
                setUserName(userInfoFromLocalStorage.name);
@@ -64,11 +66,7 @@ const Navbar = () => {
                     </NavLink>
                </li>
                <li>
-                    <NavLink
-                         to="/allContest"
-                    >
-                         Our Contests
-                    </NavLink>
+                    <NavLink to="/allContest">Our Contests</NavLink>
                </li>
                <li>
                     <NavLink to="/contacts">Contact Us</NavLink>
@@ -96,10 +94,11 @@ const Navbar = () => {
                )}
           </>
      );
+
+     // /* #252734 dark */   /*  #2a2c39 light */
+
      return (
           <div>
-               {/* #252734 dark */}
-               {/*  #2a2c39 light */}
                <div className="bg-[#252734] fixed z-50 w-full">
                     <Container>
                          <div className="navbar">
@@ -179,7 +178,8 @@ const Navbar = () => {
 
                                                             <div>
                                                                  {userEmail &&
-                                                                      users.role === 'owner' && (
+                                                                      users.role ===
+                                                                           "owner" && (
                                                                            <>
                                                                                 <li>
                                                                                      <Link to="/dashboard/addHouse">
@@ -193,7 +193,8 @@ const Navbar = () => {
                                                             </div>
                                                             <div>
                                                                  {userEmail &&
-                                                                      users.role === 'renter' && (
+                                                                      users.role ===
+                                                                           "renter" && (
                                                                            <>
                                                                                 <li>
                                                                                      <Link to="/renter ">
@@ -205,7 +206,7 @@ const Navbar = () => {
                                                                            </>
                                                                       )}
                                                             </div>
-                                                            
+
                                                             <li>
                                                                  {userEmail ? (
                                                                       <button
