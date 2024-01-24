@@ -15,49 +15,52 @@ const myCreatedRouter = createBrowserRouter([
      {
           path: "/",
           element: <Root></Root>,
-          errorElement:<ErrorPage></ErrorPage>,
-          children:[
+          errorElement: <ErrorPage></ErrorPage>,
+          children: [
                {
-                    path:"/",
-                    element:<HomePage></HomePage>
+                    path: "/",
+                    element: <HomePage></HomePage>,
                },
                {
-                    path:"/allHomePages",
-                    element:<AllHousePage></AllHousePage>
+                    path: "/allHomePages",
+                    element: <AllHousePage></AllHousePage>,
                },
                {
-                    path:"/details/:id",
-                    element:<HomeDetailsPage></HomeDetailsPage>,
-                    loader:({params})=>fetch(`http://localhost:5000/ownerCollections/${params.id}`)
+                    path: "/details/:id",
+                    element: <HomeDetailsPage></HomeDetailsPage>,
+                    loader: ({ params }) =>
+                         fetch(
+                              `https://job-project-server-iota.vercel.app/ownerCollections/${params.id}`
+                         ),
                },
                {
-                    path:"/login",
-                    element:<LoginPage></LoginPage>
+                    path: "/login",
+                    element: <LoginPage></LoginPage>,
                },
                {
-                    path:"/registration",
-                    element:<RegistrationPage></RegistrationPage>
+                    path: "/registration",
+                    element: <RegistrationPage></RegistrationPage>,
                },
-          ]
+          ],
      },
      {
-          path:"/dashboard",
-          element:<Dashboard></Dashboard>,
-          children:[
+          path: "/dashboard",
+          element: <Dashboard></Dashboard>,
+          children: [
                {
-                    path:"/dashboard/addHouse",
-                    element:<AddHousePage></AddHousePage>
+                    path: "/dashboard/addHouse",
+                    element: <AddHousePage></AddHousePage>,
                },
                {
-                    path:"/dashboard/ownerManageBookings",
-                    element:<OwnerManageBookings></OwnerManageBookings>
+                    path: "/dashboard/ownerManageBookings",
+                    element: <OwnerManageBookings></OwnerManageBookings>,
                },
                {
-                    path:"/dashboard/ownerHouseList",
-                    element:<OwnerHouseList></OwnerHouseList>
+                    path: "/dashboard/ownerHouseList",
+                    element: <OwnerHouseList></OwnerHouseList>,
                },
-          ]
-     }
+          ],
+     },
 ]);
 
 export default myCreatedRouter;

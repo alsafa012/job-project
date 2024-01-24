@@ -50,20 +50,29 @@ const RegistrationPage = () => {
           //           icon: "error",
           //      });
           // }
-
+          // const userInfoFromLocalStorage = JSON.parse(
+          //      localStorage.getItem("user")
+          // );
+          // if (userInfoFromLocalStorage.email) {
+          //      return Swal.fire({
+          //           title: "Error!",
+          //           text: "User Already logged In",
+          //           icon: "error",
+          //      });
+          // }
           const userInfo = {
                name: name,
                email: email,
                CreatedTime: moment().format("MMMM Do YYYY, h:mm:ss a"),
                role: role,
                contactNumber: phone,
-               photoURL:photo
+               photoURL: photo,
           };
           const localInfo = { name: name, email: email };
           localStorage.setItem("user", JSON.stringify(localInfo));
 
           axiosPublic.post("/users", userInfo).then((res) => {
-               console.log("asdad",res.data.role);
+               // console.log("asdad",res.data.role);
                if (res.data.insertedId) {
                     if (res.data.role === "House Owner") {
                          navigate("/dashboard/addHouse");

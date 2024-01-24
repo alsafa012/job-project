@@ -12,7 +12,7 @@ const Navbar = () => {
      console.log(userEmail);
      console.log(userName);
      const navigate = useNavigate();
-     const [users] = useUser();
+     const [users,refetch] = useUser();
      console.log(users);
 
      useEffect(() => {
@@ -47,6 +47,7 @@ const Navbar = () => {
                          icon: "success",
                     });
                }
+               refetch();
           });
      };
 
