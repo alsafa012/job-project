@@ -18,14 +18,14 @@ const CountSection = () => {
                                    {scrollTrigger && (
                                         <CountUp
                                              start={0}
-                                             end={5}
+                                             end={50}
                                              duration={2.75}
                                         />
                                    )}
                                    +
                               </h2>
                               <p className="text-2xl font-medium">
-                                   Brands
+                                   Houses
                               </p>
                          </div>
                          <div className="text-black">
@@ -33,14 +33,14 @@ const CountSection = () => {
                                    {scrollTrigger && (
                                         <CountUp
                                              start={0}
-                                             end={65}
+                                             end={100}
                                              duration={2.75}
                                         />
                                    )}
                                    +
                               </h2>
                               <p className="text-2xl font-medium">
-                                   Collections
+                                   Renters
                               </p>
                          </div>
                          <div className="text-black">
@@ -55,7 +55,7 @@ const CountSection = () => {
                                    %
                               </h2>
                               <p className="text-2xl font-medium">
-                                   Authentic
+                                   Trustable
                               </p>
                          </div>
                     </div>

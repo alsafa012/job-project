@@ -9,14 +9,13 @@ const Navbar = () => {
      const [toggle, setToggle] = useState(false);
      const [userEmail, setUserEmail] = useState("");
      const [userName, setUserName] = useState("");
-     console.log(userEmail);
-     console.log(userName);
+     console.log("from local storage",userEmail);
+     // console.log("from local storage",userName);
      const navigate = useNavigate();
-     const [users,refetch] = useUser();
+     const [users, refetch] = useUser();
      console.log(users);
 
      useEffect(() => {
-          
           const userInfoFromLocalStorage = JSON.parse(
                localStorage.getItem("user")
           );
@@ -34,7 +33,7 @@ const Navbar = () => {
                showCancelButton: true,
                confirmButtonColor: "#3085d6",
                cancelButtonColor: "#d33",
-               confirmButtonText: "Yes, delete it!",
+               confirmButtonText: "Yes",
           }).then((result) => {
                if (result.isConfirmed) {
                     setUserEmail("");
@@ -152,8 +151,12 @@ const Navbar = () => {
                                              {userEmail ? (
                                                   <div className="w-10 rounded-full">
                                                        <img
-                                                            src="https://i.ibb.co/cCMpkzh/product-8-300x300.jpg"
-                                                            // src={user.photoURL}
+                                                            // src="https://i.ibb.co/cCMpkzh/product-8-300x300.jpg"
+                                                            src={
+                                                                 users.photoURL
+                                                                      ? users.photoURL
+                                                                      : "https://md-ridoy-234.imgbb.com/?page=6&seek=xXsRMs4"
+                                                            }
                                                        />
                                                   </div>
                                              ) : (
@@ -174,7 +177,7 @@ const Navbar = () => {
                                                        <div className="text-black">
                                                             <li>
                                                                  <h2 className="font-medium">
-                                                                      {userName}
+                                                                      {users.name}
                                                                  </h2>
                                                             </li>
 
@@ -184,7 +187,7 @@ const Navbar = () => {
                                                                            "owner" && (
                                                                            <>
                                                                                 <li>
-                                                                                     <Link to="/dashboard/addHouse">
+                                                                                     <Link to="/dashboard/ownerHouseList">
                                                                                           <h4>
                                                                                                Dashboard
                                                                                           </h4>

@@ -10,6 +10,7 @@ import OwnerManageBookings from "../Dashboard/OwnerDashboard/OwnerManageBookings
 import OwnerHouseList from "../Dashboard/OwnerDashboard/OwnerHouseList/OwnerHouseList";
 import AllHousePage from "../Pages/AllHousePage/AllHousePage";
 import HomeDetailsPage from "../Pages/HouseDetailsPage/HouseDetailsPage";
+import UpdateHouseDetails from "../Dashboard/OwnerDashboard/UpdateHouseDetails/UpdateHouseDetails";
 
 const myCreatedRouter = createBrowserRouter([
      {
@@ -30,7 +31,15 @@ const myCreatedRouter = createBrowserRouter([
                     element: <HomeDetailsPage></HomeDetailsPage>,
                     loader: ({ params }) =>
                          fetch(
-                              `https://job-project-server-iota.vercel.app/ownerCollections/${params.id}`
+                              `http://localhost:5000/ownerCollections/${params.id}`
+                         ),
+               },
+               {
+                    path: "//update/:id",
+                    element: <UpdateHouseDetails></UpdateHouseDetails>,
+                    loader: ({ params }) =>
+                         fetch(
+                              `http://localhost:5000/ownerCollections/${params.id}`
                          ),
                },
                {

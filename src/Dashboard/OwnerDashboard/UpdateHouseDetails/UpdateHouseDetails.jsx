@@ -1,19 +1,27 @@
 import { useForm } from "react-hook-form";
-import Swal from "sweetalert2";
-import WebsiteTitle from "../../../Shared/WebsiteTitle/WebsiteTitle";
-import Container from "../../../Shared/Container/Container";
+import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
+import SectionTitle from '../../../Shared/SectionTitle/SectionTitle';
+import WebsiteTitle from '../../../Shared/WebsiteTitle/WebsiteTitle';
+import Container from '../../../Shared/Container/Container';
 import useAxiosPublic from "../../../Components/hook/useAxiosPublic";
-import SectionTitle from "../../../Shared/SectionTitle/SectionTitle";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import Swal from "sweetalert2";
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
-
-const AddHousePage = () => {
-     const { register, handleSubmit, reset } = useForm();
+const UpdateHouseDetails = () => {
+     const houseDetails=useLoaderData()
+     console.log(houseDetails);
+     const {_id,image}=houseDetails;
+     const { register, handleSubmit } = useForm();
      const axiosPublic = useAxiosPublic();
+     const location = useLocation()
+     console.log(location.pathname);
      const navigate = useNavigate();
-     const userInfoFromLocalStorage = JSON.parse(localStorage.getItem("user"));
+     // const from = location.state || '/'
+     // navigate(from, { replace: true });
+     const from = location?.state || "/"
+     const userInfoFromLocalStorage = JSON.parse(
+          localStorage.getItem("user")
+     );
      // console.log(userInfoFromLocalStorage.email)
      const onSubmit = async (data) => {
           console.log(data);
@@ -26,10 +34,10 @@ const AddHousePage = () => {
           //      localStorage.getItem("user")
           // );
           // console.log(userInfoFromLocalStorage);
-
+          
           if (res.data.success) {
                // send the menuitem data to the data with the image url
-               const addHouseDetails = {
+               const updateHouseDetails = {
                     email: userInfoFromLocalStorage.email,
                     name: data.name,
                     address: data.address,
@@ -41,34 +49,31 @@ const AddHousePage = () => {
                     rentPerMonth: parseFloat(data.rentPerMonth),
                     availability: data.date,
                     description: data.description,
-                    image: res.data.data.display_url,
+                    image: res.data.data.display_url || image,
                     rentCount: 0,
-                    status: "pending",
                };
-               console.log(addHouseDetails);
-               const houseCollections = await axiosPublic.post(
-                    "/ownerCollections",
-                    addHouseDetails
-               );
-               console.log(houseCollections.data);
+               console.log(updateHouseDetails);
+               
+               const contextRes = await axiosPublic.put(`/ownerCollections/${_id}`,updateHouseDetails);
+               // console.log(contextRes.data);
                // console.log("object");
-               if (houseCollections.data.insertedId) {
-                    navigate("/dashboard/ownerHouseList");
+               if (contextRes.data.modifiedCount > 0) {
                     Swal.fire({
                          title: "Good job!",
-                         text: `${data.name} House added Successfully`,
+                         text: "contest updated successfully",
                          icon: "success",
                     });
+                    navigate(from, {replace:true});
                }
-               reset();
+               // reset();
           }
           console.log(res.data);
      };
-
      return (
-          <Container>
-               <WebsiteTitle title={"Owner || Add House"}></WebsiteTitle>
-               <SectionTitle subHeading={"Add House For Rent"}></SectionTitle>
+          <div className='pt-16 light-bg'>
+               <Container>
+               <WebsiteTitle title={"Owner || Update House Details"}></WebsiteTitle>
+               <SectionTitle subHeading={"Update House Details"}></SectionTitle>
                <div className="bg- p-2">
                     <form onSubmit={handleSubmit(onSubmit)}>
                          <div className="space-y-3 font-medium">
@@ -77,13 +82,14 @@ const AddHousePage = () => {
                                    <div className="form-control w-full">
                                         <label className="label">
                                              <span className="text-white">
-                                                  House Owner's Name*
+                                             House Owner's Name*
                                              </span>
                                         </label>
                                         <input
                                              {...register("name", {
                                                   required: true,
                                              })}
+                                             defaultValue={houseDetails.name}
                                              type="text"
                                              placeholder="House Owner's Name"
                                              className="input input-bordered w-full text-black"
@@ -93,16 +99,14 @@ const AddHousePage = () => {
                                    <div className="form-control w-full">
                                         <label className="label">
                                              <span className="text-white">
-                                                  House Owner's Email*
+                                             House Owner's Email*
                                              </span>
                                         </label>
                                         <input
                                              {...register("email", {
                                                   required: true,
                                              })}
-                                             value={
-                                                  userInfoFromLocalStorage.email
-                                             }
+                                             value={houseDetails?.email}
                                              type="text"
                                              placeholder="House Owner's Email"
                                              className="input input-bordered w-full text-black"
@@ -119,6 +123,7 @@ const AddHousePage = () => {
                                              {...register("address", {
                                                   required: true,
                                              })}
+                                             defaultValue={houseDetails.address}
                                              type="text"
                                              placeholder="House address"
                                              className="input input-bordered w-full text-black"
@@ -135,6 +140,7 @@ const AddHousePage = () => {
                                              {...register("city", {
                                                   required: true,
                                              })}
+                                             defaultValue={houseDetails.city}
                                              type="text"
                                              placeholder="House city"
                                              className="input input-bordered w-full text-black"
@@ -151,6 +157,7 @@ const AddHousePage = () => {
                                              {...register("bedrooms", {
                                                   required: true,
                                              })}
+                                             defaultValue={houseDetails.bedrooms}
                                              type="text"
                                              placeholder="House Bedrooms"
                                              className="input input-bordered w-full text-black"
@@ -167,6 +174,7 @@ const AddHousePage = () => {
                                              {...register("bathrooms", {
                                                   required: true,
                                              })}
+                                             defaultValue={houseDetails.bathrooms}
                                              type="text"
                                              placeholder="House Bathrooms"
                                              className="input input-bordered w-full text-black"
@@ -183,6 +191,7 @@ const AddHousePage = () => {
                                              {...register("roomSize", {
                                                   required: true,
                                              })}
+                                             defaultValue={houseDetails.roomSize}
                                              type="text"
                                              placeholder="House Room Size"
                                              className="input input-bordered w-full text-black"
@@ -200,6 +209,7 @@ const AddHousePage = () => {
                                              {...register("rentPerMonth", {
                                                   required: true,
                                              })}
+                                             defaultValue={houseDetails.rentPerMonth}
                                              type="text"
                                              placeholder="Home Rent Per Month"
                                              className="input input-bordered w-full text-black"
@@ -216,6 +226,7 @@ const AddHousePage = () => {
                                              {...register("phone", {
                                                   required: true,
                                              })}
+                                             defaultValue={houseDetails.phone}
                                              type="text"
                                              placeholder="Owner's Contact Number"
                                              className="input input-bordered w-full text-black"
@@ -233,6 +244,7 @@ const AddHousePage = () => {
                                              {...register("date", {
                                                   required: true,
                                              })}
+                                             defaultValue={houseDetails.availability}
                                              type="date"
                                              placeholder="Price Money"
                                              className="input input-bordered w-full text-black"
@@ -250,6 +262,7 @@ const AddHousePage = () => {
                                         {...register("description", {
                                              required: true,
                                         })}
+                                        defaultValue={houseDetails.description}
                                         className="textarea textarea-bordered text-black"
                                         placeholder="Description"
                                    ></textarea>
@@ -259,7 +272,9 @@ const AddHousePage = () => {
                                    <input
                                         {...register("image")}
                                         type="file"
-                                        className="file-input file-input-ghost w-full max-w-xs"
+                                        // defaultValue={image}
+                                        required
+                                        className="file-input text-white file-input-ghost w-full max-w-xs"
                                    />
                               </div>
                          </div>
@@ -271,7 +286,8 @@ const AddHousePage = () => {
                     </form>
                </div>
           </Container>
+          </div>
      );
 };
 
-export default AddHousePage;
+export default UpdateHouseDetails;

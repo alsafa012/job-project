@@ -40,13 +40,13 @@ const ShowOwnerHouseList = ({ houseDetails }) => {
                               <p>Description: {description}...</p>
                          </div>
                          {/* <p className="text-red-400">Note: {instruction}</p> */}
-                         <div className="text-center">
+                         {/* <div className="text-center">
                               <Link to={`/details/${_id}`}>
                                    <button className="btn primary-btn red w-full my-3">
                                         Details
                                    </button>
                               </Link>
-                         </div>
+                         </div> */}
                     </div>
                </div>
           </div>

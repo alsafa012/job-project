@@ -43,13 +43,7 @@ const RegistrationPage = () => {
                return;
           }
           // create a new user
-          // if (user) {
-          //      return Swal.fire({
-          //           title: "Error!",
-          //           text: "user already logged in",
-          //           icon: "error",
-          //      });
-          // }
+          
           // const userInfoFromLocalStorage = JSON.parse(
           //      localStorage.getItem("user")
           // );
@@ -74,8 +68,11 @@ const RegistrationPage = () => {
           axiosPublic.post("/users", userInfo).then((res) => {
                // console.log("asdad",res.data.role);
                if (res.data.insertedId) {
-                    if (res.data.role === "House Owner") {
-                         navigate("/dashboard/addHouse");
+                    console.log(form.role.value);
+                    if (form.role.value === "owner") {
+                         navigate("/dashboard/ownerHouseList");
+                    } if(form.role.value === "renter"){
+                         navigate("/dashboard/ownerHouseList");
                     } else {
                          navigate("/");
                     }
